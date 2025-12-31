@@ -12,7 +12,13 @@ export default function Question({
     selectedAnswer: "",
     isCorrect: null,
   });
-
+  let timer = 10000;
+  if (answer.selectedAnswer) {
+    timer = 1000;
+  }
+  if (answer.isCorrect !== null) {
+    timer = 2000;
+  }
   const currentQuestion = QUESTIONS[QuestionIndex];
 
   const handleAnswerSelection = (selectedAnswer) => {
@@ -41,36 +47,15 @@ export default function Question({
         ? "correct"
         : "wrong";
   }
-  //   const [answerState, setAnswerState] = useState("");
-  //   const [userAnswers, setUserAnswers] = useState([]);
-  //   const currentQuestionIndex =
-  //     answerState === "" ? userAnswers.length : userAnswers.length - 1;
-  //   const currentQuestion = QUESTIONS[currentQuestionIndex];
 
-  //   const handleAnswerSelection = useCallback(
-  //     (answer) => {
-  //       setAnswerState("answered");
-  //       setUserAnswers((prevUserAnswers) => [...prevUserAnswers, answer]);
-
-  //       setTimeout(() => {
-  //         if (answer === currentQuestion.answers[0]) {
-  //           setAnswerState("correct");
-  //         } else {
-  //           setAnswerState("wrong");
-  //         }
-  //         setTimeout(() => {
-  //           setAnswerState("");
-  //         }, 2000);
-  //       }, 1000);
-  //     },
-  //     [currentQuestion]
-  //   );
-  //   const handleTimeout = useCallback(() => {
-  //     handleAnswerSelection(null);
-  //   }, [handleAnswerSelection]);
   return (
     <div id="question">
-      <QuestionTimer timeout={10000} onTimeout={onSkipQuestion} />
+      <QuestionTimer
+        key={timer}
+        timeout={timer}
+        onTimeout={answer.selectedAnswer ? null : onSkipQuestion}
+        mode={answerState}
+      />
       <h2>{currentQuestion?.text}</h2>
       <Answers
         answers={currentQuestion?.answers}

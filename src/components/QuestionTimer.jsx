@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export default function QuestionTimer({ timeout, onTimeout }) {
+export default function QuestionTimer({ timeout, onTimeout, mode }) {
   const [remainingTime, setRemainingTime] = useState(timeout);
 
   useEffect(() => {
@@ -18,5 +18,12 @@ export default function QuestionTimer({ timeout, onTimeout }) {
     return () => clearInterval(interval);
   }, []);
 
-  return <progress value={remainingTime} max={timeout} id="question-timer" />;
+  return (
+    <progress
+      value={remainingTime}
+      max={timeout}
+      id="question-timer"
+      className={mode}
+    />
+  );
 }

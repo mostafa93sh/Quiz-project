@@ -2,6 +2,7 @@ import { useState, useCallback } from "react";
 import Questions from "../questions.js";
 import quizCompleteImg from "../assets/quiz-complete.png";
 import Question from "./Question.jsx";
+import Summery from "./Summery.jsx";
 
 export default function Quiz() {
   const [userAnswers, setUserAnswers] = useState([]);
@@ -18,12 +19,7 @@ export default function Quiz() {
     handleAnswerSelection(null);
   }, [handleAnswerSelection]);
   if (quizIsFinished) {
-    return (
-      <div id="summary">
-        <img src={quizCompleteImg} alt="quiz-finished" />
-        <h2>Quiz Finished!</h2>
-      </div>
-    );
+    return <Summery userAnswers={userAnswers} />;
   }
 
   return (

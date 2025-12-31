@@ -4,43 +4,27 @@ import quizCompleteImg from "../assets/quiz-complete.png";
 import Question from "./Question.jsx";
 
 export default function Quiz() {
-  //   const [userAnswers, setUserAnswers] = useState([]);
-  //   const [answerState, setAnswerState] = useState("");
-  //   const currentQuestionIndex =
-  //     answerState === "" ? userAnswers.length : userAnswers.length - 1;
-  //   const currentQuestion = Questions[currentQuestionIndex];
-  //   const quizIsFinished = userAnswers.length === Questions.length;
+  const [userAnswers, setUserAnswers] = useState([]);
 
-  //   const handleAnswerSelection = useCallback(
-  //     (answer) => {
-  //       setAnswerState("answered");
-  //       setUserAnswers((prevUserAnswers) => [...prevUserAnswers, answer]);
+  const currentQuestionIndex = userAnswers.length;
+  const currentQuestion = Questions[currentQuestionIndex];
+  const quizIsFinished = userAnswers.length === Questions.length;
 
-  //       setTimeout(() => {
-  //         if (answer === currentQuestion.answers[0]) {
-  //           setAnswerState("correct");
-  //         } else {
-  //           setAnswerState("wrong");
-  //         }
-  //         setTimeout(() => {
-  //           setAnswerState("");
-  //         }, 2000);
-  //       }, 1000);
-  //     },
-  //     [currentQuestion]
-  //   );
+  const handleAnswerSelection = useCallback((answer) => {
+    setUserAnswers((prevUserAnswers) => [...prevUserAnswers, answer]);
+  }, []);
 
-  //   const handleTimeout = useCallback(() => {
-  //     handleAnswerSelection(null);
-  //   }, [handleAnswerSelection]);
-  //   if (quizIsFinished) {
-  //     return (
-  //       <div id="summary">
-  //         <img src={quizCompleteImg} alt="quiz-finished" />
-  //         <h2>Quiz Finished!</h2>
-  //       </div>
-  //     );
-  //   }
+  const handleTimeout = useCallback(() => {
+    handleAnswerSelection(null);
+  }, [handleAnswerSelection]);
+  if (quizIsFinished) {
+    return (
+      <div id="summary">
+        <img src={quizCompleteImg} alt="quiz-finished" />
+        <h2>Quiz Finished!</h2>
+      </div>
+    );
+  }
 
   return (
     <div id="quiz">
@@ -57,7 +41,12 @@ export default function Quiz() {
           answerState={answerState}
           userAnswer={userAnswers[currentQuestionIndex]}
         /> */}
-        <Question />
+        <Question
+          QuestionIndex={currentQuestionIndex}
+          key={currentQuestionIndex}
+          onSelectAnswer={handleAnswerSelection}
+          onSkipQuestion={handleTimeout}
+        />
       </div>
     </div>
   );

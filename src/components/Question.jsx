@@ -51,7 +51,7 @@ export default function Question({
   return (
     <div id="question">
       <QuestionTimer
-        key={timer}
+        key={`timer-${answer.selectedAnswer}-${answer.isCorrect}`}
         timeout={timer}
         onTimeout={answer.selectedAnswer ? null : onSkipQuestion}
         mode={answerState}

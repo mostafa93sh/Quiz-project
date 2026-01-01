@@ -8,7 +8,7 @@ export default function Quiz() {
   const [userAnswers, setUserAnswers] = useState([]);
 
   const currentQuestionIndex = userAnswers.length;
-  const currentQuestion = Questions[currentQuestionIndex];
+
   const quizIsFinished = userAnswers.length === Questions.length;
 
   const handleAnswerSelection = useCallback((answer) => {
@@ -25,18 +25,6 @@ export default function Quiz() {
   return (
     <div id="quiz">
       <div id="question">
-        {/* <QuestionTimer
-          key={currentQuestionIndex}
-          timeout={10000}
-          onTimeout={handleTimeout}
-        />
-        <h2>{currentQuestion?.text}</h2>
-        <Answers
-          answers={currentQuestion?.answers}
-          onAnswerSelect={handleAnswerSelection}
-          answerState={answerState}
-          userAnswer={userAnswers[currentQuestionIndex]}
-        /> */}
         <Question
           QuestionIndex={currentQuestionIndex}
           key={currentQuestionIndex}

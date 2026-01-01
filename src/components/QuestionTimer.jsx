@@ -4,19 +4,25 @@ export default function QuestionTimer({ timeout, onTimeout, mode }) {
   const [remainingTime, setRemainingTime] = useState(timeout);
 
   useEffect(() => {
+    const end = Date.now() + timeout;
+
+    const interval = setInterval(() => {
+      const remaining = Math.max(0, end - Date.now());
+      setRemainingTime(remaining);
+      if (remaining === 0) {
+        clearInterval(interval);
+      }
+    }, 100);
+
     const timer = setTimeout(() => {
       onTimeout();
     }, timeout);
-    return () => clearTimeout(timer);
+
+    return () => {
+      clearInterval(interval);
+      clearTimeout(timer);
+    };
   }, [timeout, onTimeout]);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setRemainingTime((prev) => prev - 100);
-    }, 100);
-
-    return () => clearInterval(interval);
-  }, []);
 
   return (
     <progress

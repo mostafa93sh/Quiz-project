@@ -35,10 +35,10 @@ src/
 └── components/
     ├── Header.jsx         # Header component with logo and title
     ├── Quiz.jsx           # Main quiz logic - manages state and question flow
-    ├── Question.jsx       # (Currently unused) - potential refactor component
+   ├── Question.jsx       # potential refactor component
     ├── QuestionTimer.jsx  # Timer component - countdown display
     ├── Answers.jsx        # Answer buttons component
-    └── Summery.jsx        # (Currently unused) - summary display component
+   └── Summery.jsx        # summary display component
 ```
 
 ## 🚀 Getting Started
@@ -116,7 +116,7 @@ The root component that renders the header and quiz container.
 
 ### **Question.jsx** & **Summery.jsx**
 
-- Currently unused placeholder components.
+- Placeholder components handling per-question display and the final summary.
 - Can be refactored for better component separation in future updates.
 
 ## 🛠 Technologies Used
